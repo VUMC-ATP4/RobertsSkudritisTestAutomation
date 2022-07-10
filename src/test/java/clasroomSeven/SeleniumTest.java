@@ -122,6 +122,7 @@ public class SeleniumTest {
         linkedInLink.click();
 
         Thread.sleep(5000);
+
     };
 
         @Test

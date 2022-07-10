@@ -5,12 +5,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class LoginPage {
+
+
     public WebDriver driver;
 
     private By usernameInputField = By.id("user-name");
     private By passwordInputField = By.id("password");
     private By loginButton = By.id("login-button");
-    private By errorText = By.cssSelector("h3[data-test='error']");
+   // private By errorText = By.cssSelector("h3[data-test='error']");
 
 
     public LoginPage(WebDriver driver) {
@@ -29,8 +31,8 @@ public class LoginPage {
         return driver.findElement(loginButton);
     }
 
-    public WebElement getErrorText() {
-        return driver.findElement(errorText);
-    }
+//    public WebElement getErrorText() {
+//        return driver.findElement(errorText);
+//    }
 
 }
