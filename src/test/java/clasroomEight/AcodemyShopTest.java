@@ -2,7 +2,11 @@ package clasroomEight;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -10,9 +14,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pageObjects.acodemyShop.MainPage;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class AcodemyShopTest {
@@ -21,14 +29,36 @@ public class AcodemyShopTest {
 
     public final String ACODEMY_SHOP_URL = "http://shop.acodemy.lv/";
 
-    @BeforeMethod
-    public void setupBrowser() {
-        System.out.println("Pirms testa");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-    }
+//    @BeforeMethod
+//    public void setupBrowser() {
+//        System.out.println("Pirms testa");
+//        driver = new ChromeDriver();
+//        driver.manage().window().maximize();
+//        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//    }
+@BeforeMethod
+public void setupBrowser() throws MalformedURLException {
+//    System.out.println("Pirms testa");
+//    ChromeOptions chromeOptions = new ChromeOptions();
+//    driver = new RemoteWebDriver(new URL("https://oauth-r.skudritis-ce729:314aeb22-ba76-41b7-966d-5ad53dd49d8f@ondemand.eu-central-1.saucelabs.com:443/wd/hub"), chromeOptions);
+//    InternetExplorerOptions browserOptions = new InternetExplorerOptions();
+//    browserOptions.setCapability("platformName", "Windows 10");
+//    browserOptions.setCapability("browserVersion", "11");
+//    Map<String, Object> sauceOptions = new HashMap<>();
+//    sauceOptions.put("build", "R test 3");
+//    sauceOptions.put("name", "R test 321");
+//    browserOptions.setCapability("sauce:options", sauceOptions);
+
+
+//    driver = new RemoteWebDriver(new URL("https://oauth-r.skudritis-ce729:314aeb22-ba76-41b7-966d-5ad53dd49d8f@ondemand.eu-central-1.saucelabs.com:443/wd/hub"), browserOptions);
+    ChromeOptions chromeOptions = new ChromeOptions();
+    driver = new RemoteWebDriver(new URL("http://192.168.0.101:4444"),chromeOptions);
+    driver.manage().window().maximize();
+    wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+}
+
 
 
     @AfterMethod
@@ -51,11 +81,7 @@ public class AcodemyShopTest {
         for (int i = 0; i < mainPage.getSearchResults().size(); i++) {
             System.out.println(mainPage.getSearchResults().get(i).findElement(By.cssSelector("h2")).getText());
             System.out.println(mainPage.getSearchResults().get(i).findElement(By.className("price")).getText());
-
-
         }
-
-
     }
 
 
